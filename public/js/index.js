@@ -1,69 +1,154 @@
-document.addEventListener('DOMContentLoaded', function () {
-            // List of months
-    const months = [
-        'jan',
-        'feb',
-        'mar',
-        'apr',
-        'may',
-        'jun',
-        'jul',
-        'aug',
-        'sep',
-        'oct',
-        'nov',
-        'dec'
-    ];
-
-            // Function to add event listeners to buttons
-            months.forEach(month => {
-                const onTimeButton = document.getElementById(`${month}-on-time`);
-                const lateButton = document.getElementById(`${month}-late`);
-
-                onTimeButton.addEventListener('click', function () {
-                    onTimeButton.disabled = true;
-                    lateButton.disabled = true;
-                });
-
-                lateButton.addEventListener('click', function () {
-                    onTimeButton.disabled = true;
-                    lateButton.disabled = true;
-                });
-            });
-});
-        
-/// Function to save the state
-        function saveState() {
-            const employeeName = document.getElementById('employee_name').value;
-            const year = document.getElementById('year').value;
-            localStorage.setItem('employee_name', employeeName);
-            localStorage.setItem('year', year);
-        }
-
-        // Function to load the state
-        function loadState() {
-            const employeeName = localStorage.getItem('employee_name');
-            const year = localStorage.getItem('year'); 
-            if (employeeName && document.getElementById('employee_name')) {
-                document.getElementById('employee_name').value = employeeName;
-            } else {
-                console.error('Employee Name element not found or value is null');
-            }
-
-            if (year && document.getElementById('year')) {
-                document.getElementById('year').value = year;
-            } 
-        }
-
-        // Ensure the DOM is fully loaded before running the script
-        document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
+            // Load state from localStorage
             loadState();
 
-            // Add event listener to save state on form submission
-            document.getElementById('control_form').addEventListener('submit', function() {
-                saveState();
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    saveState(this);
+                });
             });
+
+            document.getElementById('submit').addEventListener('click', checkData);
         });
+
+        function saveState(element) {
+            const month = element.getAttribute('data-month');
+            const status = element.classList.contains('on-time') ? 'on-time' : 'late';
+
+            // Save to localStorage
+            localStorage.setItem(month, status);
+
+            // Update UI
+            updateUI();
+        }
+
+        function loadState() {
+            document.querySelectorAll('.btn').forEach(button => {
+                const month = button.getAttribute('data-month');
+                const savedStatus = localStorage.getItem(month);
+
+                if (savedStatus) {
+                    if (button.classList.contains(savedStatus)) {
+                        button.classList.add('selected');
+                    } else {
+                        button.classList.remove('selected');
+                    }
+                }
+            });
+        }
+
+        function updateUI() {
+            document.querySelectorAll('.on-time, .late').forEach(button => {
+                const month = button.getAttribute('data-month');
+                const savedStatus = localStorage.getItem(month);
+
+                if (button.classList.contains(savedStatus)) {
+                    button.classList.add('selected');
+                } else {
+                    button.classList.remove('selected');
+                }
+            });
+        }
+
+document.addEventListener('DOMContentLoaded', function () {
+    // List of months
+    const months = [
+        'jan', 'feb', 'mar', 'apr', 'may', 'jun', 
+        'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
+    ];// Extend this list as needed
+    // Add event listeners for buttons
+    months.forEach(month => {
+        const onTimeButton = document.getElementById(`${month}-on-time`);
+        const lateButton = document.getElementById(`${month}-late`);
+        onTimeButton.addEventListener('click', function () {
+            selectButton(month, 'on-time');
+        });
+
+        lateButton.addEventListener('click', function () {
+            selectButton(month, 'late');
+        });
+    });
+
+    // Add event listener for the "Check Data" button
+    const checkDataButton = document.getElementById('submit');
+    checkDataButton.addEventListener('click', function () {
+        loadSelections();
+    });
+
+    loadSelections(); // Load selections on page load
+});
+
+function selectButton(month, status) {
+    const onTimeButton = document.getElementById(`${month}-on-time`);
+    const lateButton = document.getElementById(`${month}-late`);
+    if (status === 'on-time') {
+        onTimeButton.classList.add('selected');
+        lateButton.classList.remove('selected');
+    } else {
+        lateButton.classList.add('selected');
+        onTimeButton.classList.remove('selected');
+    }
+
+    const employeeName = document.getElementById('employee_name').value;
+    const year = document.getElementById('year').value;
+    localStorage.setItem(`${employeeName}-${year}-${month}`, status);
+}
+
+function loadSelections() {
+    const employeeName = document.getElementById('employee_name').value;
+    const year = document.getElementById('year').value;
+    const months = [
+        'jan', 'feb', 'mar', 'apr', 'may', 'jun',
+        'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
+    ];// Extend this list as needed
+    months.forEach(month => {
+        const status = localStorage.getItem(`${employeeName}-${year}-${month}`);
+        if (status) {
+            const onTimeButton = document.getElementById(`${month}-on-time`);
+            const lateButton = document.getElementById(`${month}-late`);
+            if (status === 'on-time') {
+                onTimeButton.classList.add('selected');
+                lateButton.classList.remove('selected');
+            } else {
+                lateButton.classList.add('selected');
+                onTimeButton.classList.remove('selected');
+            }
+        }
+    });
+}
+
+
+// Function to save the state
+function saveState() {
+    const employeeName = document.getElementById('employee_name').value;
+    const year = document.getElementById('year').value;
+    localStorage.setItem('employee_name', employeeName);
+    localStorage.setItem('year', year);
+}
+// Function to load the state
+function loadState() {
+    const employeeName = localStorage.getItem('employee_name');
+    const year = localStorage.getItem('year');
+    if (employeeName && document.getElementById('employee_name')) {
+        document.getElementById('employee_name').value = employeeName;
+    }
+
+    if (year && document.getElementById('year')) {
+        document.getElementById('year').value = year;
+    } 
+}
+        
+// Ensure the DOM is fully loaded before running the script
+document.addEventListener('DOMContentLoaded', () => {
+    loadState();
+
+    // Add event listener to save state on form submission
+    document.getElementById('control_form').addEventListener('submit', function () {
+        saveState();
+    });
+});
+
+
 // Set the Cursor position
 document.querySelectorAll('input[type=text]').forEach(input => {
 let lastValue = '';
@@ -102,6 +187,7 @@ var rows = document.getElementsByTagName('tr');
     }
 }
 
+
 document.addEventListener('click', function () {
     // Get the values from the form
 const contractValue = parseFloat(document.getElementById('contract_value').value.replace(/\./g, ''));
@@ -119,17 +205,18 @@ const percent2 = parseFloat(document.getElementById('percent2').value.replace(/\
     document.getElementById('net_value2').value = isNaN(netValue2) ? 0 : netValue2.toLocaleString('id-ID');
 });
 
+
     document.addEventListener('DOMContentLoaded', function() {
     var table = document.getElementById('controlTable');
     var button = document.getElementById('submit');
 
     // Check session storage to see if the table should be displayed
     if (sessionStorage.getItem('tableDisplayed') === 'true') {
-        table.style.display = 'block';
+        table.style.display = 'inline-block';
     }
 
     button.addEventListener('click', function() {
-        table.style.display = 'block';
+        table.style.display = 'inline-block';
 
         // Save the table state in session storage
         sessionStorage.setItem('tableDisplayed', 'true');
@@ -137,8 +224,10 @@ const percent2 = parseFloat(document.getElementById('percent2').value.replace(/\
 
     // Clear the local storage when the page is reloaded
     document.addEventListener('beforeunload', function() {
-        sessionStorage.removeItem('tableDisplayed');
+        SessionStorage.removeItem('tableDisplayed');
     });
+        
+        
 });
 
 
@@ -151,7 +240,6 @@ const percent2 = parseFloat(document.getElementById('percent2').value.replace(/\
         } 
     }
 });
-
     document.getElementById('employee2').addEventListener('change', function() {
     var employee1 = document.getElementById('employee1');
     for (var i = 0; i < employee1.options.length; i++) {
@@ -161,6 +249,7 @@ const percent2 = parseFloat(document.getElementById('percent2').value.replace(/\
         } 
     }
 });
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const clientNameSelect = document.getElementById('client_candidate');
@@ -183,6 +272,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
 
 document.addEventListener("DOMContentLoaded", function() {
     // Get the dropdown and the table

@@ -62,17 +62,7 @@
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="year"> Year </label>
-        <select name="year" id="year" class="form-select" required>
-            <option value="">--Select Year--</option>
-            <hr/>
-            <option>2024</option>
-            <option>2025</option>
-            <option>2026</option>
-            <option>2027</option>
-            <option>2028</option>
-            <option>2029</option>
-            <option>2030</option>
-        </select>
+        <input type="number" id="year" name="year" class="form-control" min="2024" max="2100" step="1">
     </div>
     <div class="col-lg-12 mt-3">
         <button class="btn btn-success" id="submit" type="submit" onclick="confirm('Are You Sure?');">Check Data</button>
@@ -101,52 +91,52 @@
                 <tr>
                     <td>{{ $projcon->client_candidate }}</td>
                     <td id="january">
-                        <button class="btn btn-danger" type="submit" id="jan-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="jan-late">LATE</button>
+                        <button class="btn btn-danger" data-month="January" type="submit" id="jan-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="January" type="submit" id="jan-late">LATE</button>
                     </td>
                     <td id="february">
-                        <button class="btn btn-danger" type="submit" id="feb-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="feb-late">LATE</button>
+                        <button class="btn btn-danger" data-month="February" type="submit" id="feb-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="February" type="submit" id="feb-late">LATE</button>
                     </td>
                     <td id="march">
-                        <button class="btn btn-danger" type="submit" id="mar-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="mar-late">LATE</button>
+                        <button class="btn btn-danger" data-month="March" type="submit" id="mar-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="March" type="submit" id="mar-late">LATE</button>
                     </td>
                     <td id="april">
-                        <button class="btn btn-danger" type="submit" id="apr-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="apr-late">LATE</button>
+                        <button class="btn btn-danger" data-month="April" type="submit" id="apr-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="April" type="submit" id="apr-late">LATE</button>
                     </td>
                     <td id="may">
-                        <button class="btn btn-danger" type="submit" id="may-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="may-late">LATE</button>
+                        <button class="btn btn-danger" data-month="May" type="submit" id="may-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="May" type="submit" id="may-late">LATE</button>
                     </td>
                     <td id="june">
-                        <button class="btn btn-danger" type="submit" id="jun-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="jun-late">LATE</button>
+                        <button class="btn btn-danger" data-month="June" type="submit" id="jun-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="June" type="submit" id="jun-late">LATE</button>
                     </td>
                     <td id="july">
-                        <button class="btn btn-danger" type="submit" id="jul-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="jul-late">LATE</button>
+                        <button class="btn btn-danger" data-month="July" type="submit" id="jul-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="July" type="submit" id="jul-late">LATE</button>
                     </td>
                     <td id="august">
-                        <button class="btn btn-danger" type="submit" id="aug-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="aug-late">LATE</button>
+                        <button class="btn btn-danger" data-month="August" type="submit" id="aug-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="August" type="submit" id="aug-late">LATE</button>
                     </td>
                     <td id="september">
-                        <button class="btn btn-danger" type="submit" id="sep-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="sep-late">LATE</button>
+                        <button class="btn btn-danger" data-month="September" type="submit" id="sep-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="September" type="submit" id="sep-late">LATE</button>
                     </td>
                     <td id="october">
-                        <button class="btn btn-danger" type="submit" id="oct-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="oct-late">LATE</button>
+                        <button class="btn btn-danger" data-month="October" type="submit" id="oct-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="October" type="submit" id="oct-late">LATE</button>
                     </td>
                     <td id="november">
-                        <button class="btn btn-danger" type="submit" id="nov-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="nov-late">LATE</button>
+                        <button class="btn btn-danger" data-month="November" type="submit" id="nov-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="November" type="submit" id="nov-late">LATE</button>
                     </td>
                     <td id="december">
-                        <button class="btn btn-danger" type="submit" id="dec-on-time">ON TIME</button>
-                        <button class="btn btn-warning" type="submit" id="dec-late">LATE</button>
+                        <button class="btn btn-danger" data-month="December" type="submit" id="dec-on-time">ON TIME</button>
+                        <button class="btn btn-warning" data-month="December" type="submit" id="dec-late">LATE</button>
                     </td>
                 </tr>
                 @endforeach

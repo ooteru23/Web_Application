@@ -9,5 +9,4 @@ class Projcon extends Model
 {
     use HasFactory;
     protected $guarded = [];
-
 }

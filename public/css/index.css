@@ -8,6 +8,7 @@ td, th {
   border: 1px solid;
   text-align: left;
   padding: 8px;
+  width: 100px;
 }
 
 tr:nth-child(even) {
@@ -20,6 +21,11 @@ tr:nth-child(even) {
 
 .btn {
     padding: 10px 20px;
-    margin: 5px;
+    margin: 2px;
     cursor: pointer;
+    display: inline-block;
+}
+
+.selected {
+    border: 3px solid #000; /* Highlight the selected button */
 }
