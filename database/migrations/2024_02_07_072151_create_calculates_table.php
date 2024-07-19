@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('calculates', function (Blueprint $table) {
             $table->id();
             $table->string('client_candidate');
+            $table->string('year');
             $table->string('contract_value');
             $table->string('commission_price');
             $table->string('software_price');
@@ -23,6 +24,18 @@ return new class extends Migration
             $table->string('percent2');
             $table->string('net_value1');
             $table->string('net_value2');
+            $table->string('jan');
+            $table->string('feb');
+            $table->string('mar');
+            $table->string('apr');
+            $table->string('may');
+            $table->string('jun');
+            $table->string('jul');
+            $table->string('aug');
+            $table->string('sep');
+            $table->string('oct');
+            $table->string('nov');
+            $table->string('dec');
             $table->timestamps();
         });
     }

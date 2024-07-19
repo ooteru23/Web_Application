@@ -1,5 +1,4 @@
 @extends('layouts.main')
-
 @section('body')
 <!-- nav section start -->
 <nav class="navbar navbar-dark bg-dark">
@@ -9,7 +8,6 @@
                 src="https://static.vecteezy.com/system/resources/previews/009/749/751/original/avatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg"
                 width="30" alt="avatar logo">
         </a>
-        <h3>SNI Consulting</h3>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -34,6 +32,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/project-control">Project Control Page</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/bonus-calculation">Bonus Calculation Page</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -41,7 +42,7 @@
 <!-- Nav End Section -->
 <!-- Form Section -->
 <div class="container">
-    <h3 class="text-center mt-3 mb-5">Edit Employee Tables</h3>
+    <h3 class="text-center mt-3 mb-5">Edit Employee Table</h3>
         <form class="row g-3" action="/employee/update/{{ $employee->id }}" method="post">
         @csrf
         <input type="hidden" name="id" id="id" value="{{ $employee->id }}">

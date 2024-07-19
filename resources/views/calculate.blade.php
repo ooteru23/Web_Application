@@ -7,7 +7,6 @@
                 src="https://static.vecteezy.com/system/resources/previews/009/749/751/original/avatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg"
                 width="30" alt="avatar logo">
         </a>
-        <h3>SNI Consulting</h3>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,6 +31,9 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/project-control">Project Control Page</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/bonus-calculation">Bonus Calculation Page</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -47,7 +49,7 @@
 @endif
 <!-- Form Section -->
 <div class="container">
-    <h3 class="text-center mt-3 mb-5">Project Setup</h3>
+    <h3 class="text-center mt-3 mb-5">Project Setup Table</h3>
     <form class="row g-3" action="/project-setup" method="post">
     @csrf
     <div class="form-group col-md-6 mt-1">
@@ -61,6 +63,10 @@
             @endif
             @endforeach
         </select>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="year"> Year </label>
+        <input type="text" id="year" name="year" class="form-control" min="1900" max="2024" step="1" value="2024" readonly>
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="contract_value">Contract Value</label>
@@ -110,6 +116,54 @@
         <label for="net_value2">Net Value 2</label>
         <input type="text" name="net_value2" id="net_value2" class="form-control" value=0 required readonly>
     </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="jan"> January </label>
+        <input type="text" name="jan" id="jan" class="form-control" value="ON PROCESS" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="feb"> February </label>
+        <input type="text" name="feb" id="feb" class="form-control" value="ON PROCESS" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="mar"> March </label>
+        <input type="text" name="mar" id="mar" class="form-control" value="ON PROCESS" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="apr"> April </label>
+        <input type="text" name="apr" id="apr" class="form-control" value="ON PROCESS" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="may"> May </label>
+        <input type="text" name="may" id="may" class="form-control" value="ON PROCESS" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="jun"> June </label>
+        <input type="text" name="jun" id="jun" class="form-control" value="ON PROCESS" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="jul"> July </label>
+        <input type="text" name="jul" id="jul" class="form-control" value="ON PROCESS" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="aug"> August </label>
+        <input type="text" name="aug" id="aug" class="form-control" value="ON PROCESS" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="sep"> September </label>
+        <input type="text" name="sep" id="sep" class="form-control" value="ON PROCESS" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="oct"> October</label>
+        <input type="text" name="oct" id="oct" class="form-control" value="ON PROCESS" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="nov"> November </label>
+        <input type="text" name="nov" id="nov" class="form-control" value="ON PROCESS" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="dec"> December </label>
+        <input type="text" name="dec" id="dec" class="form-control" value="ON PROCESS" readonly>
+    </div>
     <div class="col-lg-12 mt-3">
         <button class="btn btn-success" type="submit" onclick="confirm('Are You Sure?');">Add Data</button>
     </div>
@@ -121,43 +175,69 @@
         <button class="btn btn-success" type="submit">Find</button>
     </form>
 <!-- Table Section Calculate -->
-<div class="row mt-3">
-    <div class="col 12">
-        <table class="table table-bordered border border-secondary" id="calculateTable">
-            <tr>
-                <th>Client Candidate</th>
-                <th>Contract Value</th>
-                <th>Commission Price</th>
-                <th>Software Price</th>
-                <th>Employee 1</th>
-                <th>Percent 1</th>
-                <th>Employee 2</th>
-                <th>Percent 2</th>
-                <th>Net Value 1</th>
-                <th>Net Value 2</th>
-                <th>Actions</th>
-            </tr>
-            @foreach ($calculates as $calculate)
+    <div class="row mt-3">
+        <div class="col 12">
+            <table class="table table-bordered border border-secondary" id="calculateTable">
                 <tr>
-                <td>{{ $calculate->client_candidate }}</td>
-                <td>{{ $calculate->contract_value }}</td>
-                <td>{{ $calculate->commission_price }}</td>
-                <td>{{ $calculate->software_price }}</td>
-                <td>{{ $calculate->employee1 }}</td>
-                <td>{{ $calculate->percent1 }}</td>
-                <td>{{ $calculate->employee2 }}</td>
-                <td>{{ $calculate->percent2 }}</td>
-                <td>{{ $calculate->net_value1 }}</td>
-                <td>{{ $calculate->net_value2 }}</td>
-                <td>
-                    <a class="btn btn-danger" href="/project-setup/delete/{{ $calculate->id }}" onclick="confirm('Are You Sure?');">Delete</a>
-                    <a class="btn btn-warning" href="/project-setup/edit/{{ $calculate->id }}">Edit</a>
-                </td>
-            </tr>
-            @endforeach
-        </table>
+                    <th>Client Candidate</th>
+                    <th hidden>Year</th>
+                    <th>Contract Value</th>
+                    <th>Commission Price</th>
+                    <th>Software Price</th>
+                    <th>Employee 1</th>
+                    <th>Percent 1</th>
+                    <th>Employee 2</th>
+                    <th>Percent 2</th>
+                    <th>Net Value 1</th>
+                    <th>Net Value 2</th>
+                    <th hidden>January</th>
+                    <th hidden>February</th>
+                    <th hidden>March</th>
+                    <th hidden>April</th>
+                    <th hidden>May</th>
+                    <th hidden>June</th>
+                    <th hidden>July</th>
+                    <th hidden>August</th>
+                    <th hidden>September</th>
+                    <th hidden>October</th>
+                    <th hidden>November</th>
+                    <th hidden>December</th>
+                    <th>Actions</th>
+                </tr>
+                @foreach ($calculates as $calculate)
+                <tr>
+                    <td>{{ $calculate->client_candidate }}</td>
+                    <td hidden>{{ $calculate->year }}</td>
+                    <td>{{ $calculate->contract_value }}</td>
+                    <td>{{ $calculate->commission_price }}</td>
+                    <td>{{ $calculate->software_price }}</td>
+                    <td>{{ $calculate->employee1 }}</td>
+                    <td>{{ $calculate->percent1 }}</td>
+                    <td>{{ $calculate->employee2 }}</td>
+                    <td>{{ $calculate->percent2 }}</td>
+                    <td>{{ $calculate->net_value1 }}</td>
+                    <td>{{ $calculate->net_value2 }}</td>
+                    <td hidden>{{ $calculate->jan }}</td>
+                    <td hidden>{{ $calculate->feb }}</td>
+                    <td hidden>{{ $calculate->mar }}</td>
+                    <td hidden>{{ $calculate->apr }}</td>
+                    <td hidden>{{ $calculate->may }}</td>
+                    <td hidden>{{ $calculate->jun }}</td>
+                    <td hidden>{{ $calculate->jul }}</td>
+                    <td hidden>{{ $calculate->aug }}</td>
+                    <td hidden>{{ $calculate->sep }}</td>
+                    <td hidden>{{ $calculate->oct }}</td>
+                    <td hidden>{{ $calculate->nov }}</td>
+                    <td hidden>{{ $calculate->dec }}</td>
+                    <td>
+                        <a class="btn btn-danger" href="/project-setup/delete/{{ $calculate->id }}" onclick="confirm('Are You Sure?');">Delete</a>
+                        <a class="btn btn-warning" href="/project-setup/edit/{{ $calculate->id }}">Edit</a>
+                    </td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
     </div>
-</div>
 <!-- Table Section Client -->
     <div class="row mt-3">
         <div class="col-12">

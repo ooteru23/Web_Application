@@ -1,31 +1,32 @@
 table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
 }
 
-td, th {
-  border: 1px solid;
-  text-align: left;
-  padding: 8px;
-  width: 100px;
+td,
+th {
+    border: 1px solid;
+    text-align: left;
+    padding: 8px;
+    width: 100px;
 }
 
 tr:nth-child(even) {
-  background-color: white;
+    background-color: white;
 }
 
 #controlTable {
-  display: none;
+    display: none;
 }
 
 .btn {
     padding: 10px 20px;
     margin: 2px;
     cursor: pointer;
-    display: inline-block;
 }
 
-.selected {
-    border: 3px solid #000; /* Highlight the selected button */
+#calculate:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
+        inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }

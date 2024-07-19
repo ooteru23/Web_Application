@@ -17,14 +17,13 @@ class ProjconController extends Controller
     public function index(Request $request)
     {
         $query = Calculate::query();
-
         if($request->filled('employee_name')){
             $filter = $request->input('employee_name');
             $query->where('employee1', $filter)->orWhere('employee2', $filter);
         }
         $projcons = $query->get();
         $persons = Employee::oldest()->get();
-        return view('projcon', compact('projcons', 'persons'));
+        return view('projcon', compact('persons', 'projcons'));
     }
 
     /**
@@ -40,7 +39,7 @@ class ProjconController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -54,24 +53,32 @@ class ProjconController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Projcon $projcon)
+    public function edit($id)
     {
-        //
+        $data = Calculate::find($id);
+        return view('edit.projcon', [
+            'title' => 'Edit Projcon',
+            'projcon' => $data
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Projcon $projcon)
+    public function update(Request $request, $id)
     {
-        //
+        $projcon = Calculate::find($id);
+        $projcon->update($request->all());
+        return redirect('/project-control')->with('success', 'Table updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Projcon $projcon)
+    public function destroy($id)
     {
-        //
+        // $projcon = Projcon::find($id);
+        // $projcon->delete();
+        // return redirect('/project-control')->with('success', 'Table has deleted successfully');
     }
 }

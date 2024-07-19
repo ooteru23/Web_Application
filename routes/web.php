@@ -1,14 +1,15 @@
 <?php
 
+use App\Models\Projcon;
+use App\Models\Calculate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BonusController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProjconController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CalculateController;
-use App\Models\Calculate;
-use App\Models\Projcon;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,14 @@ Route::post('/project-setup/update/{id}', [CalculateController::class, 'update']
 Route::get('/project-setup/delete/{id}', [CalculateController::class, 'destroy']);
 
 Route::get('/project-control', [ProjconController::class, 'index']);
+Route::get('/project-control/edit/{id}', [ProjconController::class, 'edit']);
+Route::post('/project-control/update/{id}', [ProjconController::class, 'update']);
+// Route::get('/project-control/delete/{id}', [ProjconController::class, 'destroy']);
+
+
+Route::get('/bonus-calculation', [BonusController::class, 'index']);
+Route::post('/bonus-calculation', [BonusController::class, 'store']);
+Route::get('/bonus-calculation/delete/{id}', [BonusController::class, 'destroy']);
 
 // Route::get('/', function () {
 //     return view('welcome');

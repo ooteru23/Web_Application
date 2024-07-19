@@ -11,17 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projcons', function (Blueprint $table) {
+        Schema::create('bonuses', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('client_name');
+            $table->string('net_value');
+            $table->string('status_work');
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('projcons');
+        Schema::dropIfExists('bonuses');
     }
 };
