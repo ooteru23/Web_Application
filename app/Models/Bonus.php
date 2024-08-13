@@ -8,5 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Bonus extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+
+    // Assuming net_value_1 and net_value_2 are columns in your database
+    protected $appends = ['bonus_value'];
+
+    public function getBonusValueAttribute()
+    {
+        return $this->net_value_1 + $this->net_value_2;
+    }
 }

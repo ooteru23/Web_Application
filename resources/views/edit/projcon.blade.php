@@ -53,7 +53,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -63,7 +62,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -73,7 +71,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -83,7 +80,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -93,7 +89,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -103,7 +98,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -113,7 +107,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -123,7 +116,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -133,7 +125,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -143,7 +134,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -153,7 +143,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -163,7 +152,6 @@
                 <hr/>
                 <option>ON TIME</option>
                 <option>LATE</option>
-                <option>Nothing</option>
             </select>
         </div>
         <div class="col-lg-12 mt-3">

@@ -64,7 +64,7 @@
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="year"> Year </label>
-        <input type="text" id="year" name="year" class="form-control" min="1900" max="2100" step="1" value="2024">
+        <input type="number" id="projcon_year" name="projcon_year" class="form-control" min="2024" max="2100" step="1" value="2024">
     </div>
     <div class="col-lg-12 mt-3">
         <button class="btn btn-success" id="checkdata" type="submit" onclick="confirm('Are You Sure?');">Check Data</button>
@@ -106,7 +106,6 @@
                     <td>{{ $projcon->nov }}</td>
                     <td>{{ $projcon->dec }}</td>
                     <td>
-                        <a class="btn btn-danger" href="/project-control/delete/{{ $projcon->id }}" onclick="confirm('Are You Sure?');">Delete</a>
                         <a class="btn btn-warning" href="/project-control/edit/{{ $projcon->id }}">Edit</a>
                     </td>
                 </tr>

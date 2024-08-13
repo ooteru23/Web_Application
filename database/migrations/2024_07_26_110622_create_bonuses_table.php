@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('bonuses', function (Blueprint $table) {
             $table->id();
             $table->string('client_name');
-            $table->string('net_value');
+            $table->string('status_month');
+            $table->string('bonus_value');
             $table->string('status_work');
             $table->timestamps();
         });

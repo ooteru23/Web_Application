@@ -11,25 +11,36 @@ use Illuminate\Http\Request;
 
 class BonusController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('bonus', [
-            'persons' => Employee::oldest()->get(),
-            'projcons' => Calculate::oldest()->get(),
-            'bonuses' => Bonus::oldest()->get()
-        ]);
+        // $query = Calculate::query();
+        // if($request->filled('employee_name') && $request->filled('bonus_year')) {
+        //     $employeeName = $request->input('employee_name');
+        //     $year = $request->input('bonus_year');
+
+        //     $query->where(function($query) use($employeeName, $year) {
+        //         $query->where('employee1', $employeeName)
+        //                 ->where('year', $year)
+        //                 ->orWhere(function($query) use($employeeName, $year) {
+        //                     $query->where('employee2', $employeeName)
+        //                             ->where('year', $year);
+        //                 });
+        //     });
+        // }
+        
+        // $bonuses = $query->get();
+        $projcons = Calculate::oldest()->get();
+        $persons = Employee::oldest()->get();
+        return view('bonus', compact('persons', 'projcons'));
     }
 
     public function store(Request $request)
     {
-        Bonus::create($request->all());
-        return redirect('/bonus-calculation')->with('success', 'Table has been added');
+        
     }
 
     public function destroy($id)
     {
-        $bonus = Bonus::find($id);
-        $bonus->delete();
-        return redirect('/bonus-calculation')->with('success', 'Table has deleted successfully');
+        
     }
 }

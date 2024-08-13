@@ -46,12 +46,12 @@ Route::get('/project-setup/delete/{id}', [CalculateController::class, 'destroy']
 Route::get('/project-control', [ProjconController::class, 'index']);
 Route::get('/project-control/edit/{id}', [ProjconController::class, 'edit']);
 Route::post('/project-control/update/{id}', [ProjconController::class, 'update']);
-// Route::get('/project-control/delete/{id}', [ProjconController::class, 'destroy']);
+
 
 
 Route::get('/bonus-calculation', [BonusController::class, 'index']);
-Route::post('/bonus-calculation', [BonusController::class, 'store']);
-Route::get('/bonus-calculation/delete/{id}', [BonusController::class, 'destroy']);
+// Route::post('/bonus-calculation', [BonusController::class, 'store']);
+// Route::get('/bonus-calculation/delete/{id}', [BonusController::class, 'destroy']);
 
 // Route::get('/', function () {
 //     return view('welcome');

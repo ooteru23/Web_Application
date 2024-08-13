@@ -66,7 +66,7 @@
     </div>
     <div class="form-group col-md-6 mt-1" hidden>
         <label for="year"> Year </label>
-        <input type="text" id="year" name="year" class="form-control" min="1900" max="2024" step="1" value="2024" readonly>
+        <input type="number" id="calculate_year" name="year" class="form-control" min="2024" max="2100" step="1" value="2024" readonly>
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="contract_value">Contract Value</label>
@@ -82,7 +82,7 @@
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="employee1">Employee 1</label>
-        <select name="employee1" id="employee1" class="form-select" required>
+        <select name="employee1" id="employee1" class="form-select">
             <option value="">--Please Choose Option--</option>
             <hr/>
             @foreach ($persons as $person)
@@ -96,7 +96,7 @@
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="employee2">Employee 2</label>
-        <select name="employee2" id="employee2" class="form-select" required>
+        <select name="employee2" id="employee2" class="form-select">
             <option value="">--Please Choose Options--</option>
             <hr/>
             @foreach ($persons as $person)
@@ -110,11 +110,11 @@
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="net_value1">Net Value 1</label>
-        <input type="text" name="net_value1" id="net_value1" class="form-control" value=0 required readonly>
+        <input type="text" name="net_value1" id="net_value1" class="form-control" value=0 readonly>
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="net_value2">Net Value 2</label>
-        <input type="text" name="net_value2" id="net_value2" class="form-control" value=0 required readonly>
+        <input type="text" name="net_value2" id="net_value2" class="form-control" value=0 readonly>
     </div>
     <div class="form-group col-md-6 mt-1" hidden>
         <label for="jan"> January </label>
@@ -179,7 +179,7 @@
         <div class="col 12">
             <table class="table table-bordered border border-secondary" id="calculateTable">
                 <tr>
-                    <th>Client Candidate</th>
+                    <th>Client Name</th>
                     <th hidden>Year</th>
                     <th>Contract Value</th>
                     <th>Commission Price</th>

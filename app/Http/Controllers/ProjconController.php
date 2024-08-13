@@ -17,10 +17,20 @@ class ProjconController extends Controller
     public function index(Request $request)
     {
         $query = Calculate::query();
-        if($request->filled('employee_name')){
-            $filter = $request->input('employee_name');
-            $query->where('employee1', $filter)->orWhere('employee2', $filter);
+        if($request->filled('employee_name') && $request->filled('projcon_year')) {
+            $employeeName = $request->input('employee_name');
+            $year = $request->input('projcon_year');
+
+            $query->where(function($query) use($employeeName, $year) {
+                $query->where('employee1', $employeeName)
+                        ->where('year', $year)
+                        ->orWhere(function($query) use($employeeName, $year) {
+                            $query->where('employee2', $employeeName)
+                                    ->where('year', $year);
+                        });
+            });
         }
+        
         $projcons = $query->get();
         $persons = Employee::oldest()->get();
         return view('projcon', compact('persons', 'projcons'));
@@ -77,7 +87,7 @@ class ProjconController extends Controller
      */
     public function destroy($id)
     {
-        // $projcon = Projcon::find($id);
+        // $projcon = Calculate::find($id);
         // $projcon->delete();
         // return redirect('/project-control')->with('success', 'Table has deleted successfully');
     }

@@ -41,11 +41,9 @@
 <!-- Form Section -->
 <div class="container">
     <h3 class="text-center mt-3 mb-5">Bonus Calculation</h3>
-    <form class="row g-3" id="control_form" action="/bonus-calculation" method="post">
-    @csrf
     <div class="form-group col-md-6 mt-1">
         <label for="employee_name"> Employee Name </label>
-        <select id="employee_name" class="form-select" required>
+        <select id="employeeName" name="employee_name" class="form-select" required>
             <option value="">--Please Choose Options--</option>
             <hr/>
             @foreach ($persons as $person)
@@ -53,17 +51,9 @@
             @endforeach
         </select>
     </div>
-    <div class="form-group col-md-6 mt-1" hidden>
-        <label for="client_name"> Client Name </label>
-        <input type="client_name" id="client_name" name="client_name" class="form-control" readonly>
-    </div>
-    <div class="form-group col-md-6 mt-1" hidden>
-        <label for="net_value"> Net Value </label>
-        <input type="net_value" id="net_value" name="net_value" class="form-control" readonly>
-    </div>
     <div class="form-group col-md-6 mt-1">
         <label for="year"> Year </label>
-        <input type="number" id="year" class="form-control"  min="1900" max="2100" step="1" value="2024">
+        <input type="number" id="year" name="bonus_year" class="form-control"  min="1900" max="2100" step="1" value="2024">
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="month"> Month </label>
@@ -84,43 +74,35 @@
             <option>December</option>
         </select>
     </div>
-    <div class="form-group col-md-6 mt-1" hidden>
-        <label for="status_work"> Status </label>
-        <input type="text" id="status_work" name="status_work" class="form-control" readonly>
-    </div>
     <div class="col-lg-12 mt-3">
-        <button class="btn btn-success" id="submit" type="submit" onclick="confirm('Are You Sure?');">Add Data</button>
+        <button class="btn btn-success" id="bonus_submit" type="submit">Calculate</button>
     </div>
-    </form>
     <br>
     <div class="row mt-3">
         <div class="col-12">
             <table class="table table-bordered border border-secondary" id="bonusTable">
                 <tr>
                     <th>Client Name</th>
-                    <th>Net Value</th>
+                    <th>Month</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    <th>Net Value</th>
                 </tr>
-                @foreach ($bonuses as $bonus )
-                    <td>{{ $bonus->client_name }}</td>
-                    <td>{{ $bonus->net_value }}</td>
-                    <td>{{ $bonus->status_work }}</td>
-                    <td>
-                        <a class="btn btn-danger" href="/bonus-calculation/delete/{{ $bonus->id }}" onclick="confirm('Are You Sure?');">Delete</a>
-                    </td>
                 <tr>
-                @endforeach
                 </tr>
             </table>
         </div>
     </div>
-    <div>
-        <label for="total_value"> Total Value : </label>
-        <input type="text" id="total_value" readonly>
+    <div class="form-group col-md-6 mt-1">
+        <label for="ontime"> Month On Time : </label>
+        <input type="text" id="ontime" value="0">
     </div>
-    <div>
-        <button id="calculate" type="submit">Calculate</button>
+    <div class="form-group col-md-6 mt-3">
+        <label for="late"> Month Late : </label>
+        <input type="text" id="late" value="0">
+    </div>
+    <div class="form-group col-md-6 mt-3">
+        <label for="total_value"> Total Net Value : </label>
+        <input type="text" id="total_value" value="0">
     </div>
     {{-- Project Control Table --}}
     <div class="row mt-3">
@@ -130,8 +112,8 @@
                     <th>Client Name</th>
                     <th>Year</th>
                     <th>Employee 1</th>
-                    <th>Employee 2</th>
                     <th>Net Value 1</th>
+                    <th>Employee 2</th>
                     <th>Net Value 2</th>
                     <th>January</th>
                     <th>February</th>
@@ -151,8 +133,8 @@
                     <td>{{ $projcon->client_candidate }}</td>
                     <td>{{ $projcon->year }}</td>
                     <td>{{ $projcon->employee1 }}</td>
-                    <td>{{ $projcon->employee2 }}</td>
                     <td>{{ $projcon->net_value1 }}</td>
+                    <td>{{ $projcon->employee2 }}</td>
                     <td>{{ $projcon->net_value2 }}</td>
                     <td>{{ $projcon->jan }}</td>
                     <td>{{ $projcon->feb }}</td>
