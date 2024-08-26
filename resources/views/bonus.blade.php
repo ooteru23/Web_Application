@@ -94,16 +94,41 @@
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="ontime"> Month On Time : </label>
-        <input type="text" id="ontime" value="0">
+        <input type="text" id="ontime" value="0" readonly>
     </div>
     <div class="form-group col-md-6 mt-3">
         <label for="late"> Month Late : </label>
-        <input type="text" id="late" value="0">
+        <input type="text" id="late" value="0" readonly>
     </div>
     <div class="form-group col-md-6 mt-3">
         <label for="total_value"> Total Net Value : </label>
-        <input type="text" id="total_value" value="0">
+        <input type="text" id="total_value" value="0" readonly>
     </div>
+    <div class="form-group col-md-6 mt-3">
+        <label for="salary_deduction"> Deduction (Salary Calculation) : </label>
+        <input type="text" id="salary_deduction" value="9000000" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-3">
+        <label for="component_bonus"> Component Bonus(Calculation) : </label>
+        <input type="text" id="component_bonus" value="2000000" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-3">
+        <label for="total_ontime">Total OnTime : </label>
+        <input type="text" id="percent_ontime" value="0%" readonly><input type="text" id="total_ontime" value="0" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-3">
+        <label for="total_late"> Total Late : </label>
+        <input type="text" id="percent_late" value="0%" readonly><input type="text" id="total_late" value="0" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-3">
+        <label for="total_bonus_ontime"> Bonus OnTime : </label>
+        <input type="text" id="percent_bonus_ontime" value="15%" readonly><input type="text" id="total_bonus_ontime" value="0" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-3">
+        <label for="total_bonus_late"> Bonus Late : </label>
+        <input type="text" id="percent_bonus_late" value="10%" readonly><input type="text" id="total_bonus_late" value="0" readonly>
+    </div>
+    
     {{-- Project Control Table --}}
     <div class="row mt-3">
         <div class="col-12">

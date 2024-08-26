@@ -34,6 +34,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const monthDropdown = document.getElementById("month");
     const monthLateField = document.getElementById("late");
     const monthOnTimeField = document.getElementById("ontime");
+    const totalNetValueField = document.getElementById("total_value");
+    const percentOnTimeField = document.getElementById("percent_ontime");
+    const percentLateField = document.getElementById("percent_late");
+    const componentBonusField = document.getElementById("component_bonus");
+    const totalOnTimeField = document.getElementById("total_ontime");
+    const totalLateField = document.getElementById("total_late");
+    const percentBonusOnTimeField = document.getElementById(
+        "percent_bonus_ontime"
+    );
+    const totalBonusOnTimeField = document.getElementById("total_bonus_ontime");
+    const percentBonusLateField = document.getElementById("percent_bonus_late");
+    const totalBonusLateField = document.getElementById("total_bonus_late");
     const submitButton = document.getElementById("bonus_submit");
 
     const updateNetValues = () => {
@@ -103,9 +115,75 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
+            // Calculate the total net value (LATE + ON TIME)
+            const totalNetValue = totalLateValue + totalOnTimeValue;
+
+            // Calculate the percentage of on-time
+            let OnTimePercentageResult = 0;
+            if (totalNetValue > 0) {
+                OnTimePercentageResult =
+                    (totalOnTimeValue / totalNetValue) * 100;
+            }
+
+            // Calculate the percentage of late
+            let LatePercentageResult = 0;
+            if (totalNetValue > 0) {
+                LatePercentageResult = (totalLateValue / totalNetValue) * 100;
+            }
+
             // Update the monthLateField with the total value
             monthLateField.value = totalLateValue.toLocaleString(); // Convert back to string format
             monthOnTimeField.value = totalOnTimeValue.toLocaleString(); // Convert back to string format
+            totalNetValueField.value = totalNetValue.toLocaleString(); // Convert back to string format
+            percentOnTimeField.value = OnTimePercentageResult + "%"; // Convert to percentage and format
+            percentLateField.value = LatePercentageResult + "%"; // Convert to percentage and format
+
+            // Take the value from Component Bonus
+            const componentBonus = parseFloat(
+                componentBonusField.value.replace(/,/g, "")
+            );
+
+            //Take value from Percent Bonus OnTime
+            const percentBonusOnTime =
+                parseFloat(
+                    percentBonusOnTimeField.value
+                        .replace(/%/g, "")
+                        .replace(/,/g, "")
+                ) / 100;
+
+            //Take value from Percent Bonus Late
+            const percentBonusLate =
+                parseFloat(
+                    percentBonusLateField.value
+                        .replace(/%/g, "")
+                        .replace(/,/g, "")
+                ) / 100;
+
+            // Get the Total OnTime based on Component Bonus and Percent OnTime
+            const percentOnTime = OnTimePercentageResult / 100; // Convert percentage to decimal
+            const totalOnTime = componentBonus * percentOnTime; // Calculate Total OnTime
+
+            // Get the Total Late based on Component Bonus and Percent Late
+            const percentLate = LatePercentageResult / 100; // Convert percentage to decimal
+            const totalLate = componentBonus * percentLate; // Calculate Total Late
+
+            // Get the Total Bonus OnTime based on Total OnTime and Percent Bonus OnTime
+            const totalBonusOnTime = totalOnTime * percentBonusOnTime; // Calculate Total Bonus OnTime
+
+            // Get the Total Bonus Late based on Total Late and Percent Bonus Late
+            const totalBonusLate = totalLate * percentBonusLate; // Calculate Total Bonus Late
+
+            // Display the calculated Total OnTime
+            totalOnTimeField.value = totalOnTime.toLocaleString(); // Convert back to string format
+
+            // Display the calculated Total Late
+            totalLateField.value = totalLate.toLocaleString(); // Convert back to string format
+
+            // Display the calculated Total Bonus OnTime
+            totalBonusOnTimeField.value = totalBonusOnTime.toLocaleString(); // Convert back to string
+
+            // Display the calculated Total Bonus OnTime
+            totalBonusLateField.value = totalBonusLate.toLocaleString(); // Convert back to string
         }
     };
 

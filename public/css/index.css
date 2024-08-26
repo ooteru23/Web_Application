@@ -30,3 +30,19 @@ tr:nth-child(even) {
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, 0.6),
         inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
+
+#percent_ontime {
+    width: 50px;
+}
+
+#percent_late {
+    width: 50px;
+}
+
+#percent_bonus_ontime {
+    width: 50px;
+}
+
+#percent_bonus_late {
+    width: 50px;
+}
