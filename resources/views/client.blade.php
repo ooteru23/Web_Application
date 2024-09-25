@@ -3,11 +3,6 @@
 <!-- nav section start -->
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img class="rounded-circle"
-                src="https://static.vecteezy.com/system/resources/previews/009/749/751/original/avatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg"
-                width="30" alt="avatar logo">
-        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,22 +13,28 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/employee">Employee Page</a>
+                    <a class="nav-link active" aria-current="page" href="/employee">Halaman Karyawan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/client">Client Page</a>
+                    <a class="nav-link active" href="/offer">Halaman Penawaran</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/offer">Offer Page</a>
+                    <a class="nav-link active" href="/client">Halaman Klien</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-setup">Project Setup Page</a>
+                    <a class="nav-link active" href="/project-setup">Halaman Setup Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-control">Project Control Page</a>
+                    <a class="nav-link active" href="/project-control">Halaman Kontrol Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/bonus-calculation">Bonus Calculation Page</a>
+                    <a class="nav-link active" href="/bonus-calculation">Halaman Kalkulasi Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/bonus-report">Halaman Laporan Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/commission-report">Halaman Komisi</a>
                 </li>
             </ul>
         </div>
@@ -42,7 +43,7 @@
 <!-- Nav End Section -->
 <!-- Form Section -->
 <div class="container">
-    <h3 class="text-center mt-3 mb-5">Client Table</h3>
+    <h3 class="text-center mt-3 mb-5">Tabel Klien</h3>
     <!-- Search Keyword -->
     <form action="/client">
         <input type="text" name="search" autofocus placeholder="Search..." autocomplete="off" value="{{ request('search') }}">
@@ -53,13 +54,13 @@
         <div class="col-12">
             <table class="table table-bordered border border-secondary">
                 <tr>
-                    <th>Client Name</th>
-                    <th>Address</th>
+                    <th>Nama Klien</th>
+                    <th>Alamat</th>
                     <th>PIC</th>
-                    <th>Phone Number</th>
-                    <th>Service</th>
-                    <th>Contract Value</th>
-                    <th>Service Started</th>
+                    <th>Nomor Telepon</th>
+                    <th>Jasa</th>
+                    <th>Nilai Kontrak</th>
+                    <th>Mulai Jasa</th>
                 </tr>
                 @foreach ($clients as $client)
                 <tr>

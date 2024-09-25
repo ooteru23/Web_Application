@@ -2,11 +2,6 @@
 @section('body')
     <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img class="rounded-circle"
-                src="https://static.vecteezy.com/system/resources/previews/009/749/751/original/avatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg"
-                width="30" alt="avatar logo">
-        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,22 +12,28 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/employee">Employee Page</a>
+                    <a class="nav-link active" aria-current="page" href="/employee">Halaman Karyawan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/client">Client Page</a>
+                    <a class="nav-link active" href="/offer">Halaman Penawaran</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/offer">Offer Page</a>
+                    <a class="nav-link active" href="/client">Halaman Klien</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-setup">Project Setup Page</a>
+                    <a class="nav-link active" href="/project-setup">Halaman Setup Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-control">Project Control Page</a>
+                    <a class="nav-link active" href="/project-control">Halaman Kontrol Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/bonus-calculation">Bonus Calculation Page</a>
+                    <a class="nav-link active" href="/bonus-calculation">Halaman Kalkulasi Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/bonus-report">Halaman Laporan Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/commission-report">Halaman Komisi</a>
                 </li>
             </ul>
         </div>
@@ -49,11 +50,11 @@
 @endif
 <!-- Form Section -->
 <div class="container">
-    <h3 class="text-center mt-3 mb-5">Project Setup Table</h3>
+    <h3 class="text-center mt-3 mb-5">Tabel Setup Project</h3>
     <form class="row g-3" action="/project-setup" method="post">
     @csrf
     <div class="form-group col-md-6 mt-1">
-        <label for="client_candidate"> Client Name </label>
+        <label for="client_candidate"> Nama Klien </label>
         <select name="client_candidate" id="client_candidate" class="form-select" required>
             <option value="">--Please Choose Option--</option>
             <hr/>
@@ -65,23 +66,23 @@
         </select>
     </div>
     <div class="form-group col-md-6 mt-1" hidden>
-        <label for="year"> Year </label>
+        <label for="year"> Tahun </label>
         <input type="number" id="calculate_year" name="year" class="form-control" min="2024" max="2100" step="1" value="2024" readonly>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="contract_value">Contract Value</label>
+        <label for="contract_value">Nilai Kontrak</label>
         <input type="text" name="contract_value" id="contract_value" class="form-control" placeholder="Insert Contract Value" required readonly>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="commission_price"> Commission Fee </label>
+        <label for="commission_price"> Biaya Komisi </label>
         <input type="text" name="commission_price" id="commission_price" class="form-control" placeholder="Insert Commission Fee" required>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="software_price"> Software Price </label>
+        <label for="software_price"> Harga Software </label>
         <input type="text" name="software_price" id="software_price" class="form-control" placeholder="Insert Software Price" required>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="employee1">Employee 1</label>
+        <label for="employee1">Karyawan 1</label>
         <select name="employee1" id="employee1" class="form-select">
             <option value="">--Please Choose Option--</option>
             <hr/>
@@ -91,11 +92,11 @@
         </select>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="percent1">Percent 1</label>
+        <label for="percent1">Persentase 1</label>
         <input type="text" name="percent1" id="percent1" class="form-control" placeholder="Insert Percent 1" required value="">
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="employee2">Employee 2</label>
+        <label for="employee2">Karyawan 2</label>
         <select name="employee2" id="employee2" class="form-select">
             <option value="">--Please Choose Options--</option>
             <hr/>
@@ -105,7 +106,7 @@
         </select>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="percent2">Percent 2</label>
+        <label for="percent2">Persentase 2</label>
         <input type="text" name="percent2" id="percent2" class="form-control" placeholder="Insert Percent 2" required>
     </div>
     <div class="form-group col-md-6 mt-1">
@@ -179,15 +180,15 @@
         <div class="col 12">
             <table class="table table-bordered border border-secondary" id="calculateTable">
                 <tr>
-                    <th>Client Name</th>
-                    <th hidden>Year</th>
-                    <th>Contract Value</th>
-                    <th>Commission Price</th>
-                    <th>Software Price</th>
-                    <th>Employee 1</th>
-                    <th>Percent 1</th>
-                    <th>Employee 2</th>
-                    <th>Percent 2</th>
+                    <th>Nama Klien</th>
+                    <th hidden>Tahun</th>
+                    <th>Nilai Kontrak</th>
+                    <th>Biaya Komisi</th>
+                    <th>Harga Software</th>
+                    <th>Karyawan 1</th>
+                    <th>Persentase 1</th>
+                    <th>Karyawan 2</th>
+                    <th>Persentase 2</th>
                     <th>Net Value 1</th>
                     <th>Net Value 2</th>
                     <th hidden>January</th>

@@ -1,15 +1,9 @@
-table {
-    font-family: arial, sans-serif;
+th,
+td {
+    border: 1px solid black;
     border-collapse: collapse;
-    width: 100%;
-}
-
-td,
-th {
-    border: 1px solid;
-    text-align: left;
-    padding: 8px;
-    width: 100px;
+    padding: 10px;
+    text-align: center;
 }
 
 tr:nth-child(even) {
@@ -31,18 +25,8 @@ tr:nth-child(even) {
         inset 2px 2px 3px rgba(0, 0, 0, 0.6);
 }
 
-#percent_ontime {
-    width: 50px;
-}
-
-#percent_late {
-    width: 50px;
-}
-
-#percent_bonus_ontime {
-    width: 50px;
-}
-
-#percent_bonus_late {
-    width: 50px;
+.bonus {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
 }

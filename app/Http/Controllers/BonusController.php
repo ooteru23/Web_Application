@@ -13,22 +13,6 @@ class BonusController extends Controller
 {
     public function index(Request $request)
     {
-        // $query = Calculate::query();
-        // if($request->filled('employee_name') && $request->filled('bonus_year')) {
-        //     $employeeName = $request->input('employee_name');
-        //     $year = $request->input('bonus_year');
-
-        //     $query->where(function($query) use($employeeName, $year) {
-        //         $query->where('employee1', $employeeName)
-        //                 ->where('year', $year)
-        //                 ->orWhere(function($query) use($employeeName, $year) {
-        //                     $query->where('employee2', $employeeName)
-        //                             ->where('year', $year);
-        //                 });
-        //     });
-        // }
-        
-        // $bonuses = $query->get();
         $projcons = Calculate::oldest()->get();
         $persons = Employee::oldest()->get();
         return view('bonus', compact('persons', 'projcons'));
@@ -36,11 +20,7 @@ class BonusController extends Controller
 
     public function store(Request $request)
     {
-        
-    }
-
-    public function destroy($id)
-    {
-        
+        Bonus::create($request->all());
+        return redirect('/bonus-calculation')->with('success', 'Data has been saved');
     }
 }

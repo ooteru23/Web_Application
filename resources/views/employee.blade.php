@@ -3,11 +3,6 @@
 <!-- nav section start -->
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img class="rounded-circle"
-                src="https://static.vecteezy.com/system/resources/previews/009/749/751/original/avatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg"
-                width="30" alt="avatar logo">
-        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -16,24 +11,30 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/employee">Employee Page</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/client">Client Page</a>
+                    <a class="nav-link active" aria-current="page" href="/employee">Halaman Karyawan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/offer">Offer Page</a>
+                    <a class="nav-link active" href="/offer">Halaman Penawaran</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-setup">Project Setup</a>
+                    <a class="nav-link active" href="/client">Halaman Klien</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-control">Project Control Page</a>
+                    <a class="nav-link active" href="/project-setup">Halaman Setup Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/bonus-calculation">Bonus Calculation Page</a>
+                    <a class="nav-link active" href="/project-control">Halaman Kontrol Project</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/bonus-calculation">Halaman Kalkulasi Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/bonus-report">Halaman Laporan Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/commission-report">Halaman Komisi</a>
                 </li>
             </ul>
         </div>
@@ -50,15 +51,15 @@
 @endif
 <!-- Form Section -->
 <div class="container">
-    <h3 class="text-center mt-3 mb-5">Employee Table</h3>
+    <h3 class="text-center mt-3 mb-5">Table Karyawan</h3>
         <form class="row g-3" action="/employee" method="post">
         @csrf
         <div class="form-group col-md-6 mt-1">
-            <label for="name"> Name </label>
+            <label for="name"> Nama </label>
             <input type="text" name="name" id="name" class="form-control" placeholder="Insert Name" required>
         </div>
         <div class="form-group col-md-6 mt-1">
-            <label for="job_title"> Job Title </label>
+            <label for="job_title"> Pekerjaan </label>
             <input type="text" name="job_title" id="job_title" class="form-control" placeholder="Insert Job Title" required>
         </div>
         <div class="form-group col-md-6 mt-1">
@@ -69,10 +70,11 @@
                 <option>Full Time</option>
                 <option>Contract</option>
                 <option>Internship</option>
+                <option>Inactive</option>
             </select>
         </div>
         <div class="form-group col-md-6 mt-1">
-            <label for="salary"> Salary </label>
+            <label for="salary"> Gaji </label>
             <input type="text" name="salary" id="salary" class="form-control" placeholder="Insert Salary" required>
         </div>
         <div class="col-lg-12 mt-3">
@@ -90,11 +92,11 @@
             <div class="col-12">
                 <table class="table table-bordered border border-secondary">
                     <tr>
-                        <th>ID Number</th>
-                        <th>Name</th>
-                        <th>Job Title</th>
+                        <th>Nama ID</th>
+                        <th>Nama</th>
+                        <th>Nama Job</th>
                         <th>Status</th>
-                        <th>Salary</th>
+                        <th>Gaji</th>
                         <th>Actions</th>
                     </tr>
                     @php

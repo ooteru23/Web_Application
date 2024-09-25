@@ -1,42 +1,146 @@
-// function calculateTotal() {
-//     let table = document.getElementById("bonusTable");
-//     let total = 0;
+document.addEventListener("DOMContentLoaded", function () {
+    const lookReport = document.getElementById("report_submit");
+    const monthDropdown = document.getElementById("month");
+    const yearDropdown = document.getElementById("year");
 
-//     if (table) {
-//         for (let i = 1; i < table.rows.length; i++) {
-//             let cells = table.rows[i].cells;
-//             if (cells.length > 0) {
-//                 let value = cells[1].innerText;
-//                 if (value !== "-" && !isNaN(convertToNumber(value))) {
-//                     total += convertToNumber(value);
-//                 }
-//             }
-//         }
-//         document.getElementById("total_bonus").value = formatNumber(total);
-//     }
-// }
+    function convertMonthName(month) {
+        const months = {
+            January: "Jan",
+            February: "Feb",
+            March: "Mar",
+            April: "Apr",
+            May: "May",
+            June: "Jun",
+            July: "Jul",
+            August: "Aug",
+            September: "Sep",
+            October: "Oct",
+            November: "Nov",
+            December: "Dec",
+        };
+        return months[month];
+    }
 
-// // Function to convert string to number
-// function convertToNumber(value) {
-//     let number = value.replace(/,/g, "").replace(/\./g, "");
-//     return parseFloat(number);
-// }
+    lookReport.addEventListener("click", function () {
+        const selectedMonth = monthDropdown.value;
+        const selectedYear = yearDropdown.value;
+        const convertedMonth = convertMonthName(selectedMonth);
 
-// // Function to format number with commas
-// function formatNumber(value) {
-//     return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-// }
+        const bonusTableRows = document.querySelectorAll(
+            "#bonusTable tr:not(:first-child)"
+        );
+        const reportTable = document.getElementById("reportTable");
+
+        // Clear all existing rows except for the header (2 first rows)
+        reportTable
+            .querySelectorAll("tr:not(:first-child):not(:nth-child(2))")
+            .forEach((row) => row.remove());
+
+        bonusTableRows.forEach(function (row) {
+            const rowYear = row.querySelector("td:nth-child(2)").innerText;
+            const rowMonth = row.querySelector("td:nth-child(3)").innerText;
+
+            if (rowYear === selectedYear && rowMonth.includes(convertedMonth)) {
+                const bonusName =
+                    row.querySelector("td:nth-child(1)").innerText;
+                const monthOnTime =
+                    row.querySelector("td:nth-child(4)").innerText;
+                const monthLate =
+                    row.querySelector("td:nth-child(5)").innerText;
+                const deduction =
+                    row.querySelector("td:nth-child(7)").innerText;
+                const componentBonus =
+                    row.querySelector("td:nth-child(8)").innerText;
+                const percentOnTime =
+                    row.querySelector("td:nth-child(9)").innerText;
+                const totalOnTime =
+                    row.querySelector("td:nth-child(10)").innerText;
+                const percentLate =
+                    row.querySelector("td:nth-child(11)").innerText;
+                const totalLate =
+                    row.querySelector("td:nth-child(12)").innerText;
+                const bonusOnTime = parseFloat(
+                    row
+                        .querySelector("td:nth-child(14)")
+                        .innerText.replace(/,/g, "")
+                );
+                const bonusLate = parseFloat(
+                    row
+                        .querySelector("td:nth-child(16)")
+                        .innerText.replace(/,/g, "")
+                );
+
+                // Calculate total from Bonus OnTime and Bonus Late
+                const totalBonus = bonusOnTime + bonusLate;
+
+                // Create a new row in the reportTable
+                const newRow = reportTable.insertRow();
+
+                // Insert data into the columns of the new row
+                newRow.insertCell().innerText = bonusName; // Name
+                newRow.insertCell().innerText = deduction; // Deduction (Salary Calculation)
+                newRow.insertCell().innerText = monthLate; // Month Late
+                newRow.insertCell().innerText = monthOnTime; // Month OnTime
+                newRow.insertCell().innerText = componentBonus; // Component Bonus
+                newRow.insertCell().innerText = percentOnTime; // Percentage OnTime
+                newRow.insertCell().innerText = percentLate; // Percentage Late
+                newRow.insertCell().innerText = totalOnTime; // Total Bonus OnTime
+                newRow.insertCell().innerText = totalLate; // Total Bonus Late
+                newRow.insertCell().innerText = bonusOnTime.toLocaleString(); // Bonus OnTime
+                newRow.insertCell().innerText = bonusLate.toLocaleString(); // Bonus Late
+
+                // Insert the sum into the Total column
+                newRow.insertCell().innerText = totalBonus.toLocaleString(); // Total
+            }
+        });
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Function to handle Save and Calculate button clicks
+    document
+        .getElementById("bonus_save")
+        .addEventListener("click", function () {
+            let tableRows = document.querySelectorAll(
+                "#bonusTable tr:not(:first-child)"
+            );
+            let totalNetValue = 0;
+
+            tableRows.forEach((row) => {
+                // Get the value of the Bonus Disbursement Status column (assume it's the last column)
+                let bonusStatus = row.cells[row.cells.length - 1].innerText;
+
+                if (bonusStatus.trim().toLowerCase() === "paid") {
+                    // Hide the row
+                    row.style.display = "none";
+                    // Optionally, mark this row as hidden so it is not included in calculations
+                    row.setAttribute("data-hidden", "true");
+                } else {
+                    // If the row is not hidden, include it in the calculation
+                    let netValue = parseInt(
+                        row.cells[3].innerText.replace(/,/g, "")
+                    );
+                    totalNetValue += netValue;
+                }
+            });
+        });
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     const mainTable = document.getElementById("bonusTable");
     const dataTable = document.getElementById("calculateTable");
     const employeeDropdown = document.getElementById("employeeName");
     const monthDropdown = document.getElementById("month");
+    const yearDropdown = document.getElementById("year");
+    const nameField = document.getElementById("name_bonus");
+    const monthField = document.getElementById("month_bonus");
+    const yearField = document.getElementById("year_bonus"); // Month field
     const monthLateField = document.getElementById("late");
     const monthOnTimeField = document.getElementById("ontime");
     const totalNetValueField = document.getElementById("total_value");
     const percentOnTimeField = document.getElementById("percent_ontime");
     const percentLateField = document.getElementById("percent_late");
+    const salaryDeductionField = document.getElementById("salary_deduction");
     const componentBonusField = document.getElementById("component_bonus");
     const totalOnTimeField = document.getElementById("total_ontime");
     const totalLateField = document.getElementById("total_late");
@@ -47,17 +151,68 @@ document.addEventListener("DOMContentLoaded", () => {
     const percentBonusLateField = document.getElementById("percent_bonus_late");
     const totalBonusLateField = document.getElementById("total_bonus_late");
     const submitButton = document.getElementById("bonus_submit");
+    const saveButton = document.getElementById("bonus_save");
+
+    const monthAbbreviations = {
+        January: "Jan",
+        February: "Feb",
+        March: "Mar",
+        April: "Apr",
+        May: "May",
+        June: "Jun",
+        July: "Jul",
+        August: "Aug",
+        September: "Sep",
+        October: "Oct",
+        November: "Nov",
+        December: "Dec",
+    };
+
+    const resetFormFields = () => {
+        nameField.value = "";
+        yearField.value = "";
+        monthField.value = "";
+        monthLateField.value = "0";
+        monthOnTimeField.value = "0";
+        totalNetValueField.value = "0";
+        percentOnTimeField.value = "0%";
+        percentLateField.value = "0%";
+        componentBonusField.value = "0";
+        totalOnTimeField.value = "0";
+        totalLateField.value = "0";
+        totalBonusOnTimeField.value = "0";
+        totalBonusLateField.value = "0";
+        saveButton.disabled = true; // Disable save button
+    };
 
     const updateNetValues = () => {
         const selectedEmployee = employeeDropdown.value;
+        const selectedYear = yearDropdown.value;
         const selectedMonth = monthDropdown.value;
         const dataRows = dataTable.querySelectorAll("tr:not(:first-child)");
         const monthCells = calculateTable.rows[0].cells;
+        let monthsArray = [];
+
+        nameField.value = selectedEmployee;
+        yearField.value = selectedYear;
+
+        // Filter data rows based on the selected year
+        const filteredRows = Array.from(dataRows).filter((row) => {
+            const yearInTable = row.cells[1].innerText;
+            return yearInTable === selectedYear; // Only return rows with the selected year
+        });
 
         // Clear all rows except the header
         mainTable
             .querySelectorAll("tr:not(:first-child)")
             .forEach((row) => row.remove());
+
+        if (filteredRows.length === 0) {
+            // If no data is found, hide the table and reset form fields to zero
+            mainTable.style.display = "table";
+            resetFormFields();
+            return; // Stop further execution
+        }
 
         // Get the index of the selected month
         const selectedMonthIndex = Array.from(monthCells).findIndex(
@@ -110,26 +265,34 @@ document.addEventListener("DOMContentLoaded", () => {
                             newRow.insertCell().innerText = monthName; // Month
                             newRow.insertCell().innerText = status; // Status
                             newRow.insertCell().innerText = netValue; // Net Value
+                            newRow.insertCell().innerText =
+                                status === "ON TIME" || status === "LATE"
+                                    ? "Unpaid"
+                                    : ""; // Bonus Disbursement Status
+
+                            // Add the abbreviated month name to the array
+                            const abbreviatedMonth =
+                                monthAbbreviations[monthName];
+                            monthsArray.push(abbreviatedMonth);
                         }
                     }
                 }
             });
 
+            // Update the month field form with the months, separated by commas
+            monthField.value = monthsArray.join(", ");
+
             // Calculate the total net value (LATE + ON TIME)
             const totalNetValue = totalLateValue + totalOnTimeValue;
 
             // Calculate the percentage of on-time
-            let OnTimePercentageResult = 0;
-            if (totalNetValue > 0) {
-                OnTimePercentageResult =
-                    (totalOnTimeValue / totalNetValue) * 100;
-            }
+            OnTimePercentageResult = (totalOnTimeValue / totalNetValue) * 100;
 
             // Calculate the percentage of late
-            let LatePercentageResult = 0;
-            if (totalNetValue > 0) {
-                LatePercentageResult = (totalLateValue / totalNetValue) * 100;
-            }
+            LatePercentageResult = (totalLateValue / totalNetValue) * 100;
+
+            OnTimePercentageResult = Math.round(OnTimePercentageResult);
+            LatePercentageResult = Math.round(LatePercentageResult);
 
             // Update the monthLateField with the total value
             monthLateField.value = totalLateValue.toLocaleString(); // Convert back to string format
@@ -138,12 +301,13 @@ document.addEventListener("DOMContentLoaded", () => {
             percentOnTimeField.value = OnTimePercentageResult + "%"; // Convert to percentage and format
             percentLateField.value = LatePercentageResult + "%"; // Convert to percentage and format
 
-            // Take the value from Component Bonus
-            const componentBonus = parseFloat(
-                componentBonusField.value.replace(/,/g, "")
+            const salaryDeduction = parseFloat(
+                salaryDeductionField.value.replace(/,/g, "")
             );
 
-            //Take value from Percent Bonus OnTime
+            const componentBonus = totalNetValue - salaryDeduction;
+            componentBonusField.value = componentBonus.toLocaleString(); // Convert back to string format
+
             const percentBonusOnTime =
                 parseFloat(
                     percentBonusOnTimeField.value
@@ -184,11 +348,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Display the calculated Total Bonus OnTime
             totalBonusLateField.value = totalBonusLate.toLocaleString(); // Convert back to string
+
+            // Enable the Save button after calculation
+            saveButton.disabled = false;
         }
     };
 
     // Update when the submit button is clicked
     submitButton.addEventListener("click", updateNetValues);
+
+    // Disable Save button on page load
+    saveButton.disabled = true;
 });
 
 // Function to save the state
@@ -220,7 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // Set the Cursor position
 document
     .querySelectorAll(
-        "#salary, #price, #contract_value, #commission_price, #software_price, #net_value1, #netvalue2, #bonus_value"
+        "#salary, #price, #contract_value, #commission_price, #software_price, #net_value1, #netvalue2, #bonus_value, #salary_deduction"
     )
     .forEach((input) => {
         // Add your IDs here

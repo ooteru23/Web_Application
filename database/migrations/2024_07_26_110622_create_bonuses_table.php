@@ -13,10 +13,22 @@ return new class extends Migration
     {
         Schema::create('bonuses', function (Blueprint $table) {
             $table->id();
-            $table->string('client_name');
-            $table->string('status_month');
-            $table->string('bonus_value');
-            $table->string('status_work');
+            $table->string('name');
+            $table->string('month');
+            $table->string('year');
+            $table->string('ontime');
+            $table->string('late');
+            $table->string('total_value');
+            $table->string('salary_deduction');
+            $table->string('component_bonus');
+            $table->string('percent_ontime');
+            $table->string('total_ontime');
+            $table->string('percent_late');
+            $table->string('total_late');
+            $table->string('percent_bonus_ontime');
+            $table->string('total_bonus_ontime');
+            $table->string('percent_bonus_late');
+            $table->string('total_bonus_late');
             $table->timestamps();
         });
     }

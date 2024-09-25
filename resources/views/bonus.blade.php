@@ -2,11 +2,7 @@
 @section('body')
     <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img class="rounded-circle"
-                src="https://static.vecteezy.com/system/resources/previews/009/749/751/original/avatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg"
-                width="30" alt="avatar logo">
-        </a>
+        
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,22 +13,28 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/employee">Employee Page</a>
+                    <a class="nav-link active" aria-current="page" href="/employee">Halaman Karyawan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/client">Client Page</a>
+                    <a class="nav-link active" href="/offer">Halaman Penawaran</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/offer">Offer Page</a>
+                    <a class="nav-link active" href="/client">Halaman Klien</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-setup">Project Setup Page</a>
+                    <a class="nav-link active" href="/project-setup">Halaman Setup Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-control">Project Control Page</a>
+                    <a class="nav-link active" href="/project-control">Halaman Kontrol Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/bonus-calculation">Bonus Calculation Page</a>
+                    <a class="nav-link active" href="/bonus-calculation">Halaman Kalkulasi Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/bonus-report">Halaman Laporan Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/commission-report">Halaman Komisi</a>
                 </li>
             </ul>
         </div>
@@ -40,9 +42,9 @@
 </nav>
 <!-- Form Section -->
 <div class="container">
-    <h3 class="text-center mt-3 mb-5">Bonus Calculation</h3>
+    <h3 class="text-center mt-3 mb-5">Kalkulasi Bonus</h3>
     <div class="form-group col-md-6 mt-1">
-        <label for="employee_name"> Employee Name </label>
+        <label for="employee_name"> Nama Karyawan </label>
         <select id="employeeName" name="employee_name" class="form-select" required>
             <option value="">--Please Choose Options--</option>
             <hr/>
@@ -52,11 +54,11 @@
         </select>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="year"> Year </label>
+        <label for="year"> Tahun </label>
         <input type="number" id="year" name="bonus_year" class="form-control"  min="1900" max="2100" step="1" value="2024">
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="month"> Month </label>
+        <label for="month"> Bulan </label>
         <select id="month" class="form-select" required>
             <option value="">--Please Choose Options--</option>
             <hr/>
@@ -81,53 +83,75 @@
     <div class="row mt-3">
         <div class="col-12">
             <table class="table table-bordered border border-secondary" id="bonusTable">
+                <h6>Bonus Table</h6>
                 <tr>
-                    <th>Client Name</th>
-                    <th>Month</th>
+                    <th>Nama Klien</th>
+                    <th>Bulan</th>
                     <th>Status</th>
                     <th>Net Value</th>
-                </tr>
-                <tr>
+                    <th>Status Pencairan Bonus</th>
                 </tr>
             </table>
         </div>
     </div>
+    <form action="/bonus-calculation" method="POST" class="bonus">
+        @csrf
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="name"> Nama : </label>
+        <input type="text" name="name" id="name_bonus" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="month"> Bulan : </label>
+        <input type="text" name="month" id="month_bonus" readonly>
+    </div>
+    <div class="form-group col-md-6 mt-1" hidden>
+        <label for="month"> Tahun : </label>
+        <input type="text" name="year" id="year_bonus" readonly>
+    </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="ontime"> Month On Time : </label>
-        <input type="text" id="ontime" value="0" readonly>
+        <label for="ontime"> Bulan On Time : </label>
+        <input type="text" name="ontime" id="ontime" value="0" readonly>
     </div>
     <div class="form-group col-md-6 mt-3">
-        <label for="late"> Month Late : </label>
-        <input type="text" id="late" value="0" readonly>
+        <label for="late"> Bulan Late : </label>
+        <input type="text" name="late" id="late" value="0" readonly>
     </div>
     <div class="form-group col-md-6 mt-3">
         <label for="total_value"> Total Net Value : </label>
-        <input type="text" id="total_value" value="0" readonly>
+        <input type="text" name="total_value" id="total_value" value="0" readonly>
     </div>
     <div class="form-group col-md-6 mt-3">
-        <label for="salary_deduction"> Deduction (Salary Calculation) : </label>
-        <input type="text" id="salary_deduction" value="9000000" readonly>
+        <label for="salary_deduction"> Pengurang (Hitungan Gaji) : </label>
+        <input type="text" name="salary_deduction" id="salary_deduction" value="0">
     </div>
     <div class="form-group col-md-6 mt-3">
-        <label for="component_bonus"> Component Bonus(Calculation) : </label>
-        <input type="text" id="component_bonus" value="2000000" readonly>
+        <label for="Debt_Recipient"> Hutang Penerimaan : </label>
+        <input type="text" id="debt_recipient" value="0" readonly>
     </div>
     <div class="form-group col-md-6 mt-3">
-        <label for="total_ontime">Total OnTime : </label>
-        <input type="text" id="percent_ontime" value="0%" readonly><input type="text" id="total_ontime" value="0" readonly>
+        <label for="component_bonus"> Bonus Komponen : </label>
+        <input type="text" name="component_bonus" id="component_bonus" value="0" readonly>
     </div>
     <div class="form-group col-md-6 mt-3">
-        <label for="total_late"> Total Late : </label>
-        <input type="text" id="percent_late" value="0%" readonly><input type="text" id="total_late" value="0" readonly>
+        <label>Total OnTime : </label>
+        <input type="text" name="percent_ontime" id="percent_ontime" value="0%" readonly><input type="text" name="total_ontime" id="total_ontime" value="0" readonly>
     </div>
     <div class="form-group col-md-6 mt-3">
-        <label for="total_bonus_ontime"> Bonus OnTime : </label>
-        <input type="text" id="percent_bonus_ontime" value="15%" readonly><input type="text" id="total_bonus_ontime" value="0" readonly>
+        <label> Total Late : </label>
+        <input type="text" name="percent_late" id="percent_late" value="0%" readonly><input type="text" name="total_late" id="total_late" value="0" readonly>
     </div>
     <div class="form-group col-md-6 mt-3">
-        <label for="total_bonus_late"> Bonus Late : </label>
-        <input type="text" id="percent_bonus_late" value="10%" readonly><input type="text" id="total_bonus_late" value="0" readonly>
+        <label> Bonus OnTime : </label>
+        <input type="text" name="percent_bonus_ontime" id="percent_bonus_ontime" value="15%" readonly><input type="text" name="total_bonus_ontime" id="total_bonus_ontime" value="0" readonly>
     </div>
+    <div class="form-group col-md-6 mt-3">
+        <label> Bonus Late : </label>
+        <input type="text" name="percent_bonus_late" id="percent_bonus_late" value="10%" readonly><input type="text" name="total_bonus_late" id="total_bonus_late" value="0" readonly>
+    </div>
+    <div class="col-lg-12 mt-3">
+        <button class="btn btn-success" id="bonus_save" type="submit" onclick="confirm('Are You Sure')">Save</button>
+    </div>
+    </form>
     
     {{-- Project Control Table --}}
     <div class="row mt-3">

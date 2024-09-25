@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BonusController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProjconController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\CalculateController;
@@ -47,11 +48,10 @@ Route::get('/project-control', [ProjconController::class, 'index']);
 Route::get('/project-control/edit/{id}', [ProjconController::class, 'edit']);
 Route::post('/project-control/update/{id}', [ProjconController::class, 'update']);
 
-
-
 Route::get('/bonus-calculation', [BonusController::class, 'index']);
-// Route::post('/bonus-calculation', [BonusController::class, 'store']);
-// Route::get('/bonus-calculation/delete/{id}', [BonusController::class, 'destroy']);
+Route::post('/bonus-calculation', [BonusController::class, 'store']);
+
+Route::get('/bonus-report', [ReportController::class, 'index']);
 
 // Route::get('/', function () {
 //     return view('welcome');

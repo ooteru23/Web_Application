@@ -82,13 +82,4 @@ class ProjconController extends Controller
         return redirect('/project-control')->with('success', 'Table updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy($id)
-    {
-        // $projcon = Calculate::find($id);
-        // $projcon->delete();
-        // return redirect('/project-control')->with('success', 'Table has deleted successfully');
-    }
 }

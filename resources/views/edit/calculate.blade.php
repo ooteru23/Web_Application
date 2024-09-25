@@ -2,11 +2,6 @@
 @section('body')
     <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img class="rounded-circle"
-                src="https://static.vecteezy.com/system/resources/previews/009/749/751/original/avatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg"
-                width="30" alt="avatar logo">
-        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,22 +12,28 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/employee">Employee Page</a>
+                    <a class="nav-link active" aria-current="page" href="/employee">Halaman Karyawan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/client">Client Page</a>
+                    <a class="nav-link active" href="/offer">Halaman Penawaran</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/offer">Offer Page</a>
+                    <a class="nav-link active" href="/client">Halaman Klien</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-setup">Project Setup Page</a>
+                    <a class="nav-link active" href="/project-setup">Halaman Setup Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-control">Project Control Page</a>
+                    <a class="nav-link active" href="/project-control">Halaman Kontrol Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/bonus-calculation">Bonus Calculation Page</a>
+                    <a class="nav-link active" href="/bonus-calculation">Halaman Kalkulasi Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/bonus-report">Halaman Laporan Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/commission-report">Halaman Komisi</a>
                 </li>
             </ul>
         </div>
@@ -41,12 +42,12 @@
 <!-- Nav End Section -->
 <!-- Form Section -->
 <div class="container">
-    <h3 class="text-center mt-3 mb-5">Edit Project Setup Table </h3>
+    <h3 class="text-center mt-3 mb-5">Edit Tabel Setup Project </h3>
     <form class="row g-3" action="/project-setup/update/{{ $calculate->id }}" method="post">
     @csrf
     <input type="hidden" name="id" id="id" value="{{ $calculate->id }}">
     <div class="form-group col-md-6 mt-1">
-        <label for="client_candidate"> Client Name </label>
+        <label for="client_candidate"> Nama Klien </label>
         <select name="client_candidate" id="client_candidate" class="form-select" required>
             <option value="">{{ $calculate->client_candidate }}</option>
             <hr/>
@@ -56,19 +57,19 @@
         </select>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="contract_value">Contract Value</label>
+        <label for="contract_value">Nilai Kontrak</label>
         <input type="text" name="contract_value" id="contract_value" class="form-control" placeholder="Insert Contract Value" required value="{{ $calculate->contract_value }}" disabled>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="commission_price"> Commission Price </label>
+        <label for="commission_price"> Biaya Komisi </label>
         <input type="text" name="commission_price" id="commission_price" class="form-control" placeholder="Insert Commission Price" required value="{{ $calculate->commission_price }}">
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="software_price"> Software Price </label>
+        <label for="software_price"> Harga Software </label>
         <input type="text" name="software_price" id="software_price" class="form-control" placeholder="Insert Software Price" required value="{{ $calculate->software_price }}">
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="employee1">Employee 1</label>
+        <label for="employee1">Karyawan 1</label>
         <select name="employee1" id="employee1" class="form-select" required>
             <option value="">{{ $calculate->employee1 }}</option>
             <hr/>
@@ -78,11 +79,11 @@
         </select>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="percent1">Percent 1</label>
+        <label for="percent1">PerSentase 1</label>
         <input type="text" name="percent1" id="percent1" class="form-control" placeholder="Insert Percent 1" required value="{{ $calculate->percent1 }}" value="%">
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="employee2">Employee 2</label>
+        <label for="employee2">Karyawan 2</label>
         <select name="employee2" id="employee2" class="form-select" required>
             <option value="">{{ $calculate->employee2 }}</option>
             <hr/>
@@ -92,16 +93,16 @@
         </select>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="percent2">Percent 2</label>
+        <label for="percent2">Persentase 2</label>
         <input type="text" name="percent2" id="percent2" class="form-control" placeholder="Insert Percent 2" required value="{{ $calculate->percent2 }}" value="%">
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="net_value1">Net Value 1</label>
-        <input type="text" name="net_value1" id="net_value1" class="form-control" placeholder="Insert Net Value 1" required value="{{ $calculate->net_value1 }}">
+        <input type="text" name="net_value1" id="net_value1" class="form-control" placeholder="Insert Net Value 1" required value="{{ $calculate->net_value1 }}" readonly>
     </div>
     <div class="form-group col-md-6 mt-1">
         <label for="net_value2">Net Value 2</label>
-        <input type="text" name="net_value2" id="net_value2" class="form-control" placeholder="Insert Net Value 2" required value="{{ $calculate->net_value2 }}">
+        <input type="text" name="net_value2" id="net_value2" class="form-control" placeholder="Insert Net Value 2" required value="{{ $calculate->net_value2 }}" readonly>
     </div>
     <div class="col-lg-12 mt-3">
         <button class="btn btn-success" type="submit" id="submit" onclick="confirm('Are You Sure?');">Edit Data</button>

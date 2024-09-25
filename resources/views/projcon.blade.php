@@ -2,11 +2,6 @@
 @section('body')
     <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img class="rounded-circle"
-                src="https://static.vecteezy.com/system/resources/previews/009/749/751/original/avatar-man-icon-cartoon-male-profile-mascot-illustration-head-face-business-user-logo-free-vector.jpg"
-                width="30" alt="avatar logo">
-        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,22 +12,28 @@
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/employee">Employee Page</a>
+                    <a class="nav-link active" aria-current="page" href="/employee">Halaman Karyawan</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/client">Client Page</a>
+                    <a class="nav-link active" href="/offer">Halaman Penawaran</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/offer">Offer Page</a>
+                    <a class="nav-link active" href="/client">Halaman Klien</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-setup">Project Setup Page</a>
+                    <a class="nav-link active" href="/project-setup">Halaman Setup Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/project-control">Project Control Page</a>
+                    <a class="nav-link active" href="/project-control">Halaman Kontrol Project</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/bonus-calculation">Bonus Calculation Page</a>
+                    <a class="nav-link active" href="/bonus-calculation">Halaman Kalkulasi Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/bonus-report">Halaman Laporan Bonus</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/commission-report">Halaman Komisi</a>
                 </li>
             </ul>
         </div>
@@ -49,11 +50,11 @@
 @endif
 <!-- Form Section -->
 <div class="container">
-    <h3 class="text-center mt-3 mb-5">Project Control Table</h3>
+    <h3 class="text-center mt-3 mb-5">Tabel Kontrol Project</h3>
     <form class="row g-3" id="control_form" action="/project-control" method="get">
     @csrf
     <div class="form-group col-md-6 mt-1">
-        <label for="employee_name"> Employee Name </label>
+        <label for="employee_name"> Nama Karyawan </label>
         <select name="employee_name" id="employee_name" class="form-select" required>
             <option value="">--Please Choose Options--</option>
             <hr/>
@@ -63,7 +64,7 @@
         </select>
     </div>
     <div class="form-group col-md-6 mt-1">
-        <label for="year"> Year </label>
+        <label for="year"> Tahun </label>
         <input type="number" id="projcon_year" name="projcon_year" class="form-control" min="2024" max="2100" step="1" value="2024">
     </div>
     <div class="col-lg-12 mt-3">
